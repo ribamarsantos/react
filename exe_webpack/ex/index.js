@@ -1,3 +1,4 @@
+import './estilo.css'
 import 'react'
 // arrow function
 // apos => similiar a return
