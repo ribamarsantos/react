@@ -1,13 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ClassComponent from './classComponent'
+
+import Field from './field.js'
 
 
 
 ReactDOM.render(
-     <ClassComponent label='Contado' initialValue={10} />
+     <Field initialValue='teste' />
     ,document.getElementById('app')
 )
+
+//import ClassComponent from './classComponent'
+
+
+
+
+//ReactDOM.render(
+     //<ClassComponent label='Contado' initialValue={10} />
+  //  ,document.getElementById('app')
+//)
 
 //ReactDOM.render(
  //   <ClassComponent value='Componente classe' />
