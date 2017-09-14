@@ -2,6 +2,6 @@
 import React from 'react'
 
 export default function() {
-    return <h1> Primeiro Componente </h1>
+    return <h1> Primeiro Componente com h1</h1>
 }
 
