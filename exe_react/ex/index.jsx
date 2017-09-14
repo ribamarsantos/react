@@ -1,5 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Component from './component'
+import Primeiro,  {Segundo} from './component'
 
-ReactDOM.render(<Component value="Show"/>, document.getElementById('app'))
+// deve colocar dentro de uma tag pai
+
+ReactDOM.render(
+     <div>
+         <Primeiro /> 
+         <Segundo />
+     </div>, 
+     document.getElementById('app'))
