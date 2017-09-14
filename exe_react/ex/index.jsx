@@ -1,12 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Primeiro,  {Segundo} from './component'
+//import Primeiro,  {Segundo} from './component'
+import SantosFamily from './santosFamily'
 
 // deve colocar dentro de uma tag pai
 
 ReactDOM.render(
-     <div>
-         <Primeiro /> 
-         <Segundo />
-     </div>, 
+     <SantosFamily />, 
      document.getElementById('app'))
