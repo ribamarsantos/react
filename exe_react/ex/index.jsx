@@ -2,10 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ClassComponent from './classComponent'
 
+
+
 ReactDOM.render(
-    <ClassComponent value='Componente classe' />
-    , document.getElementById('app')
+     <ClassComponent label='Contado' initialValue={10} />
+    ,document.getElementById('app')
 )
+
+//ReactDOM.render(
+ //   <ClassComponent value='Componente classe' />
+ //   , document.getElementById('app')
+//)
 
 //import Primeiro,  {Segundo} from './component'
 //import SantosFamily from './santosFamily'
