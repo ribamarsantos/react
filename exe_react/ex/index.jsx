@@ -8,7 +8,8 @@ import Member from './member'
 // deve colocar dentro de uma tag pai
 
 ReactDOM.render(
-     <Family>
-         <Member name='Ribamar' lastName='Santos' />
+     <Family lastName='Santos'>
+         <Member name='Ribamar' />
+         <Member name='Amanda' />
       </Family>
      ,document.getElementById('app'))

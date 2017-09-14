@@ -19,7 +19,8 @@ module.exports = {
             loader: 'babel-loader', 
             exclude: /node_modules/, //retirar arquivos node_modules
             query:{
-                presets:['es2015','react']// o que eu vou traduzir (transpile)
+                presets:['es2015','react'],// o que eu vou traduzir (transpile)
+                plugins:['transform-object-rest-spread']
             }
         }]
     }
