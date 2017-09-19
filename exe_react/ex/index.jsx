@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom'
 import { combineReducers, createStore} from 'redux'
 import {Provider} from 'react-redux'
 
-import Field from './field.js'
+import Field from './field'
+import fieldReducer from './fieldReducer'
 
-
+//reducers são funções puras
 const reducers = combineReducers({
-  field: () => ({ value:'Opa'})
+  field: fieldReducer
 })
 
 
