@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
         },{
             _id:3,
             description: 'Crédito no celular',
-            done: done
+            done: true
         }]
     })
 })
