@@ -1,8 +1,8 @@
 {
-  "name": "boilerplate",
+  "name": "expensify",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Ribamar Santos <ribamaar@gmail.com>",
+  "author": "Ribamar Santos",
   "license": "MIT",
   "scripts": {
     "serve": "live-server public/",
