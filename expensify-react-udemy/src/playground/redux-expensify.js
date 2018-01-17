@@ -1,22 +1,24 @@
 import { createStore, combineReducers } from "redux";
 
-// default states for expenses
+// 0 - default states for expenses
 
-const expensesReducerDefaultStore = [];
-const filtersReducerDefaultStore = {
+const expensesReducerDefaultState = [];
+const filtersReducerDefaultState = {
     text: '',
     sortBy: 'date',
     startDate: undefined,
     endDate: undefined
 }
+
 // 1 - create reducer 
-const expensesReducer = ( state = expensesReducerDefaultStore, action) => {
+
+const expensesReducer = ( state = expensesReducerDefaultState, action) => {
     switch (action.type) {
         default:
             return state;
     }
 }
-const filterReducer = (state = filtersReducerDefaultStore, action) =>{
+const filterReducer = (state = filtersReducerDefaultState, action) =>{
     switch (action.type) {
         default:
             return state;
