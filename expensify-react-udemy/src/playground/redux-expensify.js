@@ -2,12 +2,14 @@ import { createStore, combineReducers } from "redux";
 import uuid from 'uuid';
 // Actions
 // ADD_EXPENSE
-const addExpense = ({
-    description = '',
-    note = '',
-    amount = 0,
-    createdAt = 0
-} = {}) => ({
+const addExpense = (
+    {
+        description = '',
+        note = '',
+        amount = 0,
+        createdAt = 0
+    } = {}
+  ) => ({
     type: 'ADD_EXPENSE',
     expense: {
         id: uuid(),
@@ -36,11 +38,29 @@ const editExpense = (id,updates) => ({
 
 // action for filter
 
+const sortByAmount = () => ({
+    type: 'SORT_BY_AMOUNT'
+});
+
+const sortByDate = () => ({
+    type: 'SORT_BY_DATE'
+});
 // SET_TEXT_FILTER
 
-const setTextFilter = (text) => ({
+const setTextFilter = (text = '') => ({
     type:'SET_TEXT_FILTER',
     text
+});
+
+// SET_START_DATE
+const setStartDate = (startDate) => ({
+    type: 'SET_START_DATE',
+    startDate
+});
+// SET_END_DATE
+const setEndDate = (endDate) => ({
+    type: 'SET_END_DATE',
+    endDate
 });
 // 0 - default states for expenses
 
@@ -89,9 +109,45 @@ const filterReducer = (state = filtersReducerDefaultState, action) =>{
             ...state,
             text: action.text
         };
+        case 'SORT_BY_DATE':
+          return {
+              ...state,
+              sortBy: 'date'
+          }
+        case 'SORT_BY_AMOUNT':
+          return {
+              ...state,
+              sortBy: 'amount'
+          }
+        case 'SET_START_DATE':
+           return {
+              ...state,
+              startDate: action.startDate
+           }; 
+        case 'SET_END_DATE':
+           return {
+              ...state,
+              endDate: action.endDate
+           };                     
         default:
             return state;
     }
+}
+
+const getVisibleExpense = (expenses, { text, sortBy, startDate, endDate }) => {
+    return expenses.filter((expense) => {
+        const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
+        const endDateMatch = typeof endDate !== 'number' || expense.createdAt <= endDate;
+        const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
+
+        return  startDateMatch && endDateMatch && textMatch;
+    }).sort((a, b) => {
+        if( sortBy === 'date') { 
+        return a.createdAt < b.createdAt ? 1 : -1 
+        } else if (sortBy === 'amount') {
+        return a.amount < b.amount ? 1 : -1;
+        }
+    });   
 }
 // 2 - insert reducer in the store with combineReducers
 
@@ -104,18 +160,27 @@ const store = createStore(combineReducers({
 // 3 - just checking the current state of store
 
 store.subscribe(() => {
-    console.log(store.getState());
+    const state = store.getState();
+    const visibleExpense = getVisibleExpense(state.expenses, state.filters);
+    console.log(visibleExpense);
 });
 
 // 4 - dispatch an ACTION 
-const expenseOne = store.dispatch(addExpense({ description:'CELPE', note: 'JAN/2018', amount: 12300}));
-const expenseTwo = store.dispatch(addExpense({ description:'NETFLIX', note: 'JAN/2018', amount: 2790}));
-const expenseThree = store.dispatch(addExpense({ description:'COMPESA', note: 'JAN/2018', amount: 4100}));
-const expenseFour = store.dispatch(addExpense({ description:'TIM', note: 'JAN/2018', amount: 5000}));
+const expenseOne = store.dispatch(addExpense({ description:'CELPE', note: 'JAN/2018', amount: 300, createdAt: -100000}));
+const expenseTwo = store.dispatch(addExpense({ description:'NETFLIX', note: 'JAN/2018', amount: 100, createdAt: -100000}));
+// const expenseThree = store.dispatch(addExpense({ description:'COMPESA', note: 'JAN/2018', amount: 4100}));
+// const expenseFour = store.dispatch(addExpense({ description:'TIM', note: 'JAN/2018', amount: 5000}));
 
-store.dispatch(editExpense(expenseOne.expense.id, { description: 'Conta de luz', note:'DEZ/2017', amount: 11700}));
+// store.dispatch(editExpense(expenseOne.expense.id, { description: 'Conta de luz', note:'DEZ/2017', amount: 11700}));
 
-store.dispatch(setTextFilter('CELPE'));
+// store.dispatch(setTextFilter('CELPE'));
+store.dispatch(sortByAmount());
+// store.dispatch(sortByDate());
+
+ //store.dispatch(setStartDate(125));
+ // store.dispatch(setTextFilter('e'));
+// store.dispatch(setStartDate());
+ // store.dispatch(setEndDate(999));
 //store.dispatch(removeExpense({id: expenseThree.expense.id}));
 // const user = {
 //     name: 'Ribamar',
