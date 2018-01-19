@@ -20,8 +20,7 @@ const updatePasswordInfo = (WrappedComponent) => {
 const requireAuthentication = (WrappedComponent) => {
     return (props) => (
         <div>
-            { !props.isLogged && <p> You are not logged. please click here!</p>}
-            {props.isLogged && <WrappedComponent {...props} />}
+            {props.isLogged ?  <WrappedComponent {...props} /> : <p> You are not logged. please click here!</p> }
         </div>
     )
 }
