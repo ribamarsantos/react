@@ -13,7 +13,7 @@ const store = configureStore();
 
 store.dispatch(addExpense({description: 'Water Bill', note:'JAN/2018', amount: 4100, createdAt: 125}));
 store.dispatch(addExpense({description: 'Gas Bill', note:'JAN/2018', amount: 5000, createdAt: 125}));
- store.dispatch(setTextFilter('wa'));
+ //store.dispatch(setTextFilter('wa'));
 
 // setTimeout(() =>{
 //     store.dispatch(setTextFilter('water'));
