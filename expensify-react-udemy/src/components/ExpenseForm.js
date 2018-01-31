@@ -1,15 +1,34 @@
 import React from 'react';
 import { addExpense } from '../actions/expenses';
+import moment from 'moment';
+import 'react-dates/initialize'; // with version 12.6.0 is not necessary
+import { SingleDatePicker } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css'
 
 
 export default class ExpenseForm extends React.Component {
     state = {
         description: '',
-        note: ''
+        amount: '',
+        note: '',
+        createdAt: moment(),
+        calendarFocused: false
     }
     onDescriptionChange = (e) => {
       const description = e.target.value;
       this.setState(() => ({description}));
+    }
+    onAmountChange = (e) => {
+        const amount = e.target.value;
+        if( amount.match(/^\d*(\.\d{0,2})?$/)){ 
+            this.setState(() => ({ amount }));
+        }
+    }
+    onDateChange = (createdAt) => {
+        this.setState(() => ({ createdAt}));
+    }
+    onCalendarFocusChange = ({focused}) => {
+        this.setState(() => ({calendarFocused: focused}));
     }
     onNoteChange = (e) => {
         // another way 
@@ -29,9 +48,20 @@ export default class ExpenseForm extends React.Component {
                         value={this.state.description}
                      />
                     <input
-                       type="number"
+                       type="text"
                        placeholder="amount"
+                       onChange={this.onAmountChange}
+                       value={this.state.amount}
                     />
+                    <SingleDatePicker
+                        date={this.state.createdAt} 
+                        onDateChange={this.onDateChange}
+                        focused={this.state.calendarFocused} 
+                        onFocusChange={this.onCalendarFocusChange}
+                        numberOfMonths={1}
+                        isOutsideRange={() => false}    
+                        displayFormat="DD/MM/YYYY"                    
+                    />                    
                     <textarea
                        placeholder="note (optional)"
                        onChange={this.onNoteChange}
