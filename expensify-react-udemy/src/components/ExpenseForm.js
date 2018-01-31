@@ -1,10 +1,12 @@
 import React from 'react';
 import { addExpense } from '../actions/expenses';
 import moment from 'moment';
+import 'moment/locale/pt-br';
 import 'react-dates/initialize'; // with version 12.6.0 is not necessary
 import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css'
 
+// moment.locale('pl');
 
 export default class ExpenseForm extends React.Component {
     state = {
@@ -59,8 +61,7 @@ export default class ExpenseForm extends React.Component {
                         focused={this.state.calendarFocused} 
                         onFocusChange={this.onCalendarFocusChange}
                         numberOfMonths={1}
-                        isOutsideRange={() => false}    
-                        displayFormat="DD/MM/YYYY"                    
+                        isOutsideRange={() => false}                   
                     />                    
                     <textarea
                        placeholder="note (optional)"
